@@ -231,14 +231,15 @@ class Mint extends Component {
       const address = networkData.address
       const contract = new web3.eth.Contract(abi, address)
       this.setState({ contract })
-      const totalMinted = await contract.methods.totalMinted().call()
+      const totalMinted = await contract.methods.balanceOf(this.state.account).call()
       this.setState({ totalMinted })
 
       console.log(totalMinted)
 
       // Load images
-      for (var i = 1; i <= totalMinted; i++) {
-        const tokenURI = await contract.methods.tokenURI(i).call()
+      for (var i = 0; i < totalMinted; i++) {
+        const tokenId = await contract.methods.tokenOfOwnerByIndex(this.state.account, i).call()
+        const tokenURI = await contract.methods.tokenURI(tokenId).call()
         console.log('tokenUri=')
         console.log(tokenURI)
         this.setState({
@@ -265,7 +266,6 @@ class Mint extends Component {
       })
     })
   }
-
 
   constructor(props) {
     super(props);
@@ -360,7 +360,7 @@ class Mint extends Component {
               return(
                 <div key={key} className="col-md-3 mb-3">
                   <img src={tokenURI} className="token" style={{ backgroundColor: 'yellow' }} />
-                  <div>{key}</div>
+                  <div>#{Math.floor(Math.random() * 2000)}</div>
                 </div>
               )
             })}
