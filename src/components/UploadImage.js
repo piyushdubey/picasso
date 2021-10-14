@@ -1,8 +1,8 @@
 
 import axios from 'axios'; 
 import React,{Component} from 'react';
-import { Link, useHistory } from "react-router-dom";
-import {BlobServiceClient, ContainerClient} from '@azure/storage-blob'
+import { Link } from "react-router-dom";
+import {BlobServiceClient} from '@azure/storage-blob'
 
  
 class UploadImage extends Component {
@@ -11,7 +11,7 @@ class UploadImage extends Component {
  
       // Initially, no file is selected
       selectedFile: null,
-      data: ["https://mlopsvarmaamlsa.blob.core.windows.net/styleai/homescreen.png"]
+      imageData: ["https://mlopsvarmaamlsa.blob.core.windows.net/styleai/homescreen.png"]
     };
     
     // On file select (from the pop up)
@@ -56,8 +56,8 @@ class UploadImage extends Component {
       console.log(response);
     
     var context = this;
-    //context.setState({data: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_1.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_2.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_3.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_4.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_5.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_6.png"]] }});
-    context.setState({data:response.data});
+    //context.setState({imageData: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_1.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_2.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_3.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_4.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_5.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_6.png"]] }});
+    context.setState({imageData:response.data});
     console.log(response.data);
 
 
@@ -125,11 +125,11 @@ class UploadImage extends Component {
             <br/>      
           <div className="Container">
               {
-                this.state.data.map(image => (
+                this.state.imageData.map(image => (
                     <div className= "image-card" key={image}>
                         <label>
                         <input type="radio" name="test" onChange={(e) => this.handleOnChange(e)} value={image}/>
-                        <img id="" className="image" src={image}  />
+                        <img id="" className="image" src={image}  alt="art images"/>
                         </label>
                     </div> 
               ))}   
