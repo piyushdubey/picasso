@@ -50,7 +50,8 @@ return (
         
         <div className = "row" style={{ paddingTop: "3%"}}>
           <div className = "col text-center">
-            <button className="btn btn-primary btn-lg" onClick={()=> {history.push("mint")}}> Start </button>
+            <button className="btn btn-primary btn-lg" onClick={()=> {history.push("mint")}}> Start </button> &nbsp;
+            <button className="btn btn-primary btn-lg" onClick={()=> {history.push("minted-tokens")}}> Show Minted Tokens </button>
           </div>
         </div>
         <div className="row" style={{ paddingTop: "4%"}}>

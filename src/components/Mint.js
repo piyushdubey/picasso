@@ -349,22 +349,36 @@ class Mint extends Component {
                     value='MINT'
                   />
                   )}
+                  {this.state.imageData.length>0 &&<div><button className={generateNewArtStyle} onClick={this.handleGoBack}>Go back</button></div>}
                 </form>
               </div>
             </main>
           </div>
-          {this.state.imageData.length>0 &&<div><button className={generateNewArtStyle} onClick={this.handleGoBack}>Go back</button></div>}
+          
           <hr/>
-          <div className="row text-center">
-            { this.state.tokenURIs.map((tokenURI, key) => {
-              return(
-                <div key={key} className="col-md-3 mb-3">
-                  <img src={tokenURI} className="token" style={{ backgroundColor: 'yellow' }} />
-                  <div>#{Math.floor(Math.random() * 2000)}</div>
-                </div>
-              )
-            })}
-          </div>
+          <h4>Minted Tokens:</h4>
+          <div className="row">
+            { 
+              this.state.tokenURIs.map((tokenURI, key) => {
+                return(
+                  <div key={key} className="col-md-4" style={{ padding: "2%"}}>
+                     <div class="row">
+                      
+                      <img src={tokenURI} className="img-thumbnail"/>
+                   
+                      <div class="col text-start">
+                        Minted Token #{Math.floor(Math.random() * 2000)}
+                      </div>
+                      <div class="col text-end">
+                        Price: <i class='fab fa-ethereum'></i> {(Math.random() * 10).toFixed(2)}
+                        
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+            }
+        </div>
         </div>}
         }
       </div>
