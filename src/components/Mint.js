@@ -1,14 +1,113 @@
 import logo from '../logo.svg';
 import Web3 from 'web3'
 import './App.css';
-import Picasso from '../abis/Picasso.json'
+import Picasso from '../abis/Picasso.json';
 import axios from 'axios'; 
 import React,{Component} from 'react';
 import { Link } from "react-router-dom";
 import {BlobServiceClient} from '@azure/storage-blob'
 
+
+import {
+  mergeStyles
+} from "office-ui-fabric-react";
+
+export const page = mergeStyles({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  margin:"0px",
+  padding: "0px"
+});
+
+export const container = mergeStyles({
+  height: "530px",
+  width: "700px",
+  borderRadius: "10px",
+  backgroundColor: "grey",
+  marginTop:"8%",
+  padding: "0px"
+});
+
+export const heading = mergeStyles({
+  textAlign: "center",
+  fontWeight: "bold",
+  marginTop: "3%",
+  marginBottom:"3%",
+  padding: "0px"
+});
+
+export const imgHolder = mergeStyles({
+  width: "600px",
+  height: "300px",
+  border: "3px solid black",
+  borderRadius: "5px",
+  marginTop: "10%",
+  margin: "auto",
+});
+
+
+export const img = mergeStyles({
+  width: "600px",
+  height:"300px",
+  objectFit: "cover",
+  marginTop: "10%",
+  padding: "0px",
+  margin: "auto"
+});
+
+export const inputimg = mergeStyles({
+  display: "none"
+});
+
+export const label = mergeStyles({
+  width : "100%",
+  marginTop:"1 rem",
+  display: "flex",
+  justifyContent: "center",
+  margin:"0px",
+  padding: "0px"
+});
+
+export const imgUpload = mergeStyles({
+  marginTop: "10%",
+  width : "200px",
+  height: "40px",
+  backgroundColor: "black",
+  color: "white",
+  borderRadius: "10px",
+  textAlign: "center",
+  cursor: "pointer",
+  padding: "0px"
+});
+
+export const generateNewArtStyle = mergeStyles({
+  marginTop: "9.8%",
+  width : "200px",
+  height: "42px",
+  backgroundColor: "black",
+  color: "white",
+  borderRadius: "10px",
+  textAlign: "center",
+  cursor: "pointer",
+  padding: "10px"
+});
+
+
+
 class Mint extends Component {
-  
+
+  imageHandler = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if(reader.readyState === 2) {
+        this.setState({profileImg: reader.result})
+        this.setState({ selectedFile: e.target.files[0] });
+      }
+    }
+    reader.readAsDataURL(e.target.files[0])
+  }
+    
   // On file select (from the pop up)
   onFileChange = event => {
   
@@ -34,6 +133,9 @@ class Mint extends Component {
   
     const blobservice= new BlobServiceClient('https://mlopsvarmaamlsa.blob.core.windows.net/?sv=2020-08-04&ss=bfqt&srt=co&sp=rwdlacuptfx&se=2021-10-30T07:13:29Z&st=2021-10-12T23:13:29Z&spr=https&sig=k%2FD4XLyZ7%2FHZJc%2B0idbr2WL0e9IEHmW%2FJEjDbWPK9HU%3D');
     const containerClient = blobservice.getContainerClient('styleai');
+    console.log("selectedfile",this.state.selectedFile);
+    console.log("selectedfileName",this.state.selectedFile.name);
+   // console.log("filename",this.state.selectedFile.name);
 
     const blobClient= containerClient.getBlockBlobClient(this.state.selectedFile.name);
     const options = {blobHTTPHeaders: {blobContentType: this.state.selectedFile.type}};
@@ -90,7 +192,6 @@ class Mint extends Component {
     }
   };
   
-
   
   async componentWillMount() {
     await this.loadWeb3()
@@ -145,8 +246,10 @@ class Mint extends Component {
   }
 
   mint = (account, tokenURI) => {
-    console.log(`account=${account}`)
-    console.log(`tokenUri=${tokenURI}`)
+    console.log('account=')
+    console.log(account)
+    console.log('tokenUri=')
+    console.log(tokenURI)
     this.state.contract.methods.mintNFT(account, tokenURI).send({ from: account })
     .once('receipt', (receipt) => {
       console.log(receipt)
@@ -166,54 +269,67 @@ class Mint extends Component {
       tokenURIs: [],
       selectedFile: null,
       selectedOption: null,
-      imageData: []
+      imageData: [],
+      profileImg : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
     };
     this.onChangeValue = this.onChangeValue.bind(this);
   }
   onChangeValue(event) {
     console.log(event.target.value);
-  }
+    }
 
   render() {
     return (
-      <div>      
-        <div>                       
-            <h3>
-              Upload Your Creation!
-            </h3>
-            <div>
-                <input type="file" onChange={this.onFileChange} />
-                <button onClick={this.onFileUpload.bind(this)}>
-                  Generate new art!
-                </button>
-            </div>    
-            <br/>      
-          <div className="Container">
-              {
-                this.state.imageData.map(image => (
-                    <div className= "image-card" key={image}>
-                        <label>
-                        <input type="radio" name="test" onChange={(e) => this.handleOnChange(e)} value={image}/>
-                        <img id="" className="image" src={image}  alt="art images"/>
+      <div>
+        <div>
+            <div className={page}>                       
+               <div className={container}>
+                 <h3 className={heading}>Upload Your Creation!</h3>
+                  <div className={imgHolder}>
+                    <img src={this.state.profileImg} alt="" id="img" className={img}/>
+                  </div>
+                  <input type="file" name="img-upload" className={inputimg} id="input" accept="image/*" onChange={this.imageHandler} />
+                      <div className={label}>
+                        <label htmlFor="input" className={imgUpload}>
+                          <i className="material-icons">add_photo_alternate</i>
+                          Click here to upload
                         </label>
-                    </div> 
-              ))}   
-              </div>                             
-        </div> 
+                      <button className={generateNewArtStyle} onClick={this.onFileUpload.bind(this)}>
+                    Generate new art!
+                   </button>
+                      </div>
+                </div>    
+              </div>
+              <div>
+              </div>  
+      <br/>      
+      <div className="Container">
+          {
+            this.state.imageData.map(image => (
+                <div className= "image-card" key={image}>
+                    <label>
+                    <input type="radio" name="test" onChange={(e) => this.handleOnChange(e)} value={image}/>
+                    <img id="" className="image" src={image}  alt="art images"/>
+                    </label>
+                </div> 
+          ))}   
+          </div>                             
+    </div> 
         <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
-              <div className="content mr-auto ml-auto">                             
+              <div className="content mr-auto ml-auto">
                 <form onSubmit={(event) => {
                   event.preventDefault()
                   const tokenURI = this.state.selectedOption
                   this.mint(this.state.account, tokenURI)
-                }}>                
+                }}>
+                  {this.state.imageData.length>0 && (
                   <input
                     type='submit'
-                    className='btn btn-block btn-primary'
+                    className={generateNewArtStyle}
                     value='MINT'
-                  />
+                  />)}
                 </form>
               </div>
             </main>
@@ -231,7 +347,7 @@ class Mint extends Component {
           </div>
         </div>
       </div>
-    );
+      );
   }
 
 
