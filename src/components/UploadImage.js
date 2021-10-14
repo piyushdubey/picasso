@@ -1,7 +1,7 @@
 
 import axios from 'axios'; 
 import React,{Component} from 'react';
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {BlobServiceClient, ContainerClient} from '@azure/storage-blob'
 
  
@@ -22,6 +22,17 @@ class UploadImage extends Component {
     
     };
     
+    // handleClick
+    handleClick = event => {
+      // history.push("/mint")
+    };
+
+    // handle on change
+    handleOnChange = event => {
+      console.log("Selected value " + event.target.value);
+      this.setState({ selectedOption: event.target.value });
+    };
+
     // On file upload (click the upload button)
      onFileUpload = async () => {  
   
@@ -100,15 +111,16 @@ class UploadImage extends Component {
           <div className="Container">
               {
                 this.state.data.image_urls.map(image => (
-                    <div className= "image-card">
+                    <div className= "image-card" key={image}>
                         <label>
-                        <input type="radio" name="test" value="small"/>
-                        <img className="image" src={image}  />
+                        <input type="radio" name="test" onChange={(e) => this.handleOnChange(e)} value={image}/>
+                        <img id="" className="image" src={image}  />
                         </label>
                     </div> 
               ))}   
               </div> 
-              
+              <Link to="/mint" onClick={(e) => this.handleClick()} className="btn btn-primary">Mint NFT</Link>
+              {/*<button onClick={(e) => this.history.push("/mint")}>Mint NFT</button>*/}
         </div>
       );
     }
