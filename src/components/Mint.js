@@ -277,7 +277,7 @@ class Mint extends Component {
       selectedFile: null,
       selectedOption: null,
       imageData: [],
-      profileImg : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+      profileImg : '/images/ai.jpg', //'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
       showSelectSection: true,
     };
     this.onChangeValue = this.onChangeValue.bind(this);
@@ -289,31 +289,40 @@ class Mint extends Component {
   render() {
     return (
       <div>
+        <div className="container">
+        <h1 className="text-center" style={{ paddingTop: "10%"}}>Azure Picasso</h1>
+        <h3 className="text-center" style={{ paddingTop: "2%"}}>{"Welcome to Azure Picasso."}</h3>
+        <h4 className="text-center">{" Your portal to create NFTs with art powered by Azure AI"}</h4>
+      
         <div>
             {this.state.showSelectSection && <div className={page}>                       
-               <div className={container}>
-                 <h3 className={heading}>Upload Your Creation!</h3>
-                  <div className={imgHolder}>
-                    <img src={this.state.profileImg} alt="" id="img" className={img}/>
+               <div className="container">
+                 <h3 className="text-center" style={{ paddingTop: "2%"}}>Upload your art</h3>
+                  
+                  <div className="row" style={{ paddingTop: "2%"}}>
+                    <div className="col text-center">
+                    <div className={imgHolder}>
+                      <img src={this.state.profileImg} alt="" id="img" className={img}/>
+                    </div>
+                    </div>
                   </div>
-                  <input type="file" name="img-upload" className={inputimg} id="input" accept="image/*" onChange={this.imageHandler} />
-                      <div className={label}>
-                        <label htmlFor="input" className={imgUpload}>
-                          <i className="material-icons">add_photo_alternate</i>
-                          Click here to upload
-                        </label>
-                      <button className={generateNewArtStyle} onClick={this.onFileUpload.bind(this)}>
-                    Generate new art!
-                   </button>
-                      </div>
+                  <div className="row text-center" style={{ paddingTop: "10%"}}>
+                    <span>
+                      <span style={{ paddingRight: "2%"}}>
+                      <label htmlFor="artImage" className="btn btn-primary btn-lg">Choose image</label>
+                      <input type="file" name="img-upload" id="artImage" style={{display: "none" }} accept="image/*" onChange={this.imageHandler}/>
+                      </span>                      
+                      <button className="btn btn-success btn-lg" onClick={this.onFileUpload.bind(this)}>Generate new art!</button>
+                    </span>
+                    </div>
                 </div>    
               </div> }
               <div>
               </div>  
       <br/>      
-      {!this.state.showSelectSection &&<><div className="Container">
+      {!this.state.showSelectSection &&<><div className="container">
             <h4> Generated art </h4>
-          </div><div className="Container">
+          </div><div className="container">
               {this.state.imageData.map(image => (
                 <div className="image-card" key={image}>
                   <label>
@@ -357,6 +366,8 @@ class Mint extends Component {
             })}
           </div>
         </div>}
+        }
+      </div>
       </div>
       );
   }
