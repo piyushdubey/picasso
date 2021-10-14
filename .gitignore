@@ -2,8 +2,6 @@
 
 # dependencies
 /node_modules
-/src/abis
-!/src/abis/Picasso.json
 /.pnp
 .pnp.js
 
