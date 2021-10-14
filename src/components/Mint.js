@@ -127,6 +127,13 @@ class Mint extends Component {
     this.setState({ selectedOption: event.target.value });
   };
 
+ handleGoBack = () => {  
+  // Update the state
+  this.setState({ showSelectSection: true });
+
+};
+
+
   // On file upload (click the upload button)
    onFileUpload = async () => {  
 
@@ -156,7 +163,7 @@ class Mint extends Component {
   //context.setState({imageData: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_1.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_2.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_3.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_4.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_5.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_6.png"]] }});
   context.setState({imageData:response.data});
   console.log(response.data);
-
+  this.setState({ showSelectSection: false });
 
   };
   
@@ -266,11 +273,12 @@ class Mint extends Component {
       account: '',
       contract: null,
       totalMinted: 0,
-      tokenURIs: [],
+      tokenURIs: [],  
       selectedFile: null,
       selectedOption: null,
       imageData: [],
       profileImg : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+      showSelectSection: true,
     };
     this.onChangeValue = this.onChangeValue.bind(this);
   }
@@ -282,7 +290,7 @@ class Mint extends Component {
     return (
       <div>
         <div>
-            <div className={page}>                       
+            {this.state.showSelectSection && <div className={page}>                       
                <div className={container}>
                  <h3 className={heading}>Upload Your Creation!</h3>
                   <div className={imgHolder}>
@@ -299,23 +307,24 @@ class Mint extends Component {
                    </button>
                       </div>
                 </div>    
-              </div>
+              </div> }
               <div>
               </div>  
       <br/>      
-      <div className="Container">
-          {
-            this.state.imageData.map(image => (
-                <div className= "image-card" key={image}>
-                    <label>
-                    <input type="radio" name="test" onChange={(e) => this.handleOnChange(e)} value={image}/>
-                    <img id="" className="image" src={image}  alt="art images"/>
-                    </label>
-                </div> 
-          ))}   
-          </div>                             
+      {!this.state.showSelectSection &&<><div className="Container">
+            <h4> Generated art </h4>
+          </div><div className="Container">
+              {this.state.imageData.map(image => (
+                <div className="image-card" key={image}>
+                  <label>
+                    <input type="radio" name="test" onChange={(e) => this.handleOnChange(e)} value={image} />
+                    <img id="" className="image" src={image} alt="art images" />
+                  </label>
+                </div>
+              ))}
+            </div></>  }                           
     </div> 
-        <div className="container-fluid mt-5">
+    {!this.state.showSelectSection &&  <div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto">
@@ -329,11 +338,13 @@ class Mint extends Component {
                     type='submit'
                     className={generateNewArtStyle}
                     value='MINT'
-                  />)}
+                  />
+                  )}
                 </form>
               </div>
             </main>
           </div>
+          {this.state.imageData.length>0 &&<div><button className={generateNewArtStyle} onClick={this.handleGoBack}>Go back</button></div>}
           <hr/>
           <div className="row text-center">
             { this.state.tokenURIs.map((tokenURI, key) => {
@@ -345,7 +356,7 @@ class Mint extends Component {
               )
             })}
           </div>
-        </div>
+        </div>}
       </div>
       );
   }
