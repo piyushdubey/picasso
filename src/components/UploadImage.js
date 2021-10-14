@@ -11,7 +11,7 @@ class UploadImage extends Component {
  
       // Initially, no file is selected
       selectedFile: null,
-      data: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/styleai/Vangough.png"]] }
+      data: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/styleai/homescreen.png"]] }
     };
     
     // On file select (from the pop up)
@@ -51,11 +51,12 @@ class UploadImage extends Component {
 
       console.log("hello2");  
       const article = { title: 'Axios POST Request Example' };
+      //const response = await axios.post('https://reqres.in/api/articles', article);
       const response = await axios.post('https://reqres.in/api/articles', article);
       console.log(response);
     
     var context = this;
-    context.setState({data: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/Vangough_styled_1.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/Vangough_styled_2.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/Vangough_styled_3.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/Vangough_styled_4.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/Vangough_styled_5.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/Vangough_styled_6.png"]] }});
+    context.setState({data: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_1.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_2.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_3.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_4.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_5.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_6.png"]] }});
    // this.setState({data: response});    
     console.log(response.data.id);
 
