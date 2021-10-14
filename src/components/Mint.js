@@ -145,10 +145,8 @@ class Mint extends Component {
   }
 
   mint = (account, tokenURI) => {
-    console.log('account=')
-    console.log(account)
-    console.log('tokenUri=')
-    console.log(tokenURI)
+    console.log(`account=${account}`)
+    console.log(`tokenUri=${tokenURI}`)
     this.state.contract.methods.mintNFT(account, tokenURI).send({ from: account })
     .once('receipt', (receipt) => {
       console.log(receipt)
@@ -239,16 +237,5 @@ class Mint extends Component {
 
 }
 
-
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//          <img src={logo} className="App-logo" alt="logo" />
-//       </header>
-//     </div>
-//   );
-// }
 
 export default Mint;

@@ -9,7 +9,7 @@ const CreateImage = () => {
 return (
     <Stack>
                        <h1>Azure Picasso</h1>
-    <DefaultButton text="Go Create" onClick={()=> {history.push("upload")}}/>
+    <DefaultButton text="Go Create" onClick={()=> {history.push("mint")}}/>
     <Stack>
     <CreateImagePic/>
   </Stack>
