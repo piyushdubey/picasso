@@ -259,7 +259,6 @@ class Mint extends Component {
     })
   }
 
-
   constructor(props) {
     super(props);
     this.state = {
@@ -340,7 +339,7 @@ class Mint extends Component {
               return(
                 <div key={key} className="col-md-3 mb-3">
                   <img src={tokenURI} className="token" style={{ backgroundColor: 'yellow' }} />
-                  <div>{key}</div>
+                  <div>#{Math.floor(Math.random() * 2000)}</div>
                 </div>
               )
             })}
