@@ -62,20 +62,6 @@ class UploadImage extends Component {
 
 
     };
-
-    mint = (account, tokenURI) => {
-      console.log('account=')
-      console.log(account)
-      console.log('tokenUri=')
-      console.log(tokenURI)
-      this.state.contract.methods.mintNFT(account, tokenURI).send({ from: account })
-      .once('receipt', (receipt) => {
-        console.log(receipt)
-        this.setState({
-          tokenURIs: [...this.state.tokenURIs, tokenURI]
-        })
-      })
-    }
     
     // File content to be displayed after
     // file upload is complete
