@@ -11,7 +11,7 @@ class UploadImage extends Component {
  
       // Initially, no file is selected
       selectedFile: null,
-      data: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/styleai/homescreen.png"]] }
+      data: ["https://mlopsvarmaamlsa.blob.core.windows.net/styleai/homescreen.png"]
     };
     
     // On file select (from the pop up)
@@ -52,16 +52,30 @@ class UploadImage extends Component {
       console.log("hello2");  
       const article = { title: 'Axios POST Request Example' };
       //const response = await axios.post('https://reqres.in/api/articles', article);
-      const response = await axios.post('https://reqres.in/api/articles', article);
+      const response = await axios.get(`https://hackpicasaapi.azurewebsites.net/arts/${this.state.selectedFile.name}`, article);
       console.log(response);
     
     var context = this;
-    context.setState({data: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_1.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_2.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_3.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_4.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_5.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_6.png"]] }});
-   // this.setState({data: response});    
-    console.log(response.data.id);
+    //context.setState({data: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_1.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_2.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_3.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_4.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_5.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_6.png"]] }});
+    context.setState({data:response.data});
+    console.log(response.data);
 
 
     };
+
+    mint = (account, tokenURI) => {
+      console.log('account=')
+      console.log(account)
+      console.log('tokenUri=')
+      console.log(tokenURI)
+      this.state.contract.methods.mintNFT(account, tokenURI).send({ from: account })
+      .once('receipt', (receipt) => {
+        console.log(receipt)
+        this.setState({
+          tokenURIs: [...this.state.tokenURIs, tokenURI]
+        })
+      })
+    }
     
     // File content to be displayed after
     // file upload is complete
@@ -111,7 +125,7 @@ class UploadImage extends Component {
             <br/>      
           <div className="Container">
               {
-                this.state.data.image_urls.map(image => (
+                this.state.data.map(image => (
                     <div className= "image-card" key={image}>
                         <label>
                         <input type="radio" name="test" onChange={(e) => this.handleOnChange(e)} value={image}/>
@@ -119,9 +133,8 @@ class UploadImage extends Component {
                         </label>
                     </div> 
               ))}   
-              </div> 
+              </div>               
               <Link to="/mint" onClick={(e) => this.handleClick()} className="btn btn-primary">Mint NFT</Link>
-              {/*<button onClick={(e) => this.history.push("/mint")}>Mint NFT</button>*/}
         </div>
       );
     }
