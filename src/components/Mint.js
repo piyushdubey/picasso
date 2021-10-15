@@ -81,16 +81,30 @@ export const imgUpload = mergeStyles({
   padding: "0px"
 });
 
-export const generateNewArtStyle = mergeStyles({
-  marginTop: "9.8%",
+export const generateNewArtStyle = mergeStyles({  
   width : "200px",
   height: "42px",
-  backgroundColor: "black",
+  backgroundColor: "#0a58ca",
+  borderColor:"#0a58ca",
   color: "white",
   borderRadius: "10px",
   textAlign: "center",
   cursor: "pointer",
-  padding: "10px"
+  padding: "10px",
+  marginLeft:"20px"
+});
+
+export const mintStyle = mergeStyles({  
+  width : "200px",
+  height: "42px",
+  backgroundColor: "green",
+  borderColor:"green",
+  color: "white",
+  borderRadius: "10px",
+  textAlign: "center",
+  cursor: "pointer",
+  padding: "10px",
+  marginLeft:"20px"
 });
 
 
@@ -320,9 +334,9 @@ class Mint extends Component {
               <div>
               </div>  
       <br/>      
-      {!this.state.showSelectSection &&<><div className="container">
+      {!this.state.showSelectSection &&<><div className="Container">
             <h4> Generated art </h4>
-          </div><div className="container">
+          </div><div className="Container">
               {this.state.imageData.map(image => (
                 <div className="image-card" key={image}>
                   <label>
@@ -343,29 +357,26 @@ class Mint extends Component {
                   this.mint(this.state.account, tokenURI)
                 }}>
                   {this.state.imageData.length>0 && (
-                  <input
-                    type='submit'
-                    className={generateNewArtStyle}
-                    value='MINT'
-                  />
+                  <><input
+                        type='submit'
+                        className={mintStyle}
+                        value='MINT' />
+                      <button className={generateNewArtStyle} onClick={this.handleGoBack}>Upload New Art</button></>
                   )}
-                  {this.state.imageData.length>0 &&<div><button className={generateNewArtStyle} onClick={this.handleGoBack}>Go back</button></div>}
                 </form>
               </div>
             </main>
           </div>
           
           <hr/>
-          <h4>Minted Tokens:</h4>
+          <h4>Minted Tokens</h4>
           <div className="row">
             { 
               this.state.tokenURIs.map((tokenURI, key) => {
                 return(
-                  <div key={key} className="col-md-4" style={{ padding: "2%"}}>
-                     <div class="row">
-                      
-                      <img src={tokenURI} className="img-thumbnail"/>
-                   
+                  <div key={key} className="col-md-3" style={{ padding: "2%"}}>
+                     <div class="row">                      
+                      <img src={tokenURI} className="image"/>                   
                       <div class="col text-start">
                         Minted Token #{Math.floor(Math.random() * 2000)}
                       </div>
@@ -379,8 +390,7 @@ class Mint extends Component {
               })
             }
         </div>
-        </div>}
-        }
+        </div>}        
       </div>
       </div>
       );

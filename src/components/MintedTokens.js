@@ -119,15 +119,18 @@ class MintedTokens extends Component {
 
     const networkId = await web3.eth.net.getId()
     const networkData = Picasso.networks[networkId]
+    console.log("networkData:", networkData)
     if(networkData) {
       const abi = Picasso.abi
       const address = networkData.address
       const contract = new web3.eth.Contract(abi, address)
       this.setState({ contract })
+      console.log("contract:", contract)
+      console.log("this.state.account:", this.state.account)
       const totalMinted = await contract.methods.balanceOf(this.state.account).call()
       this.setState({ totalMinted })
 
-      console.log(totalMinted)
+      console.log("total minted:", totalMinted)
 
       // Load images
       for (var i = 0; i < totalMinted; i++) {
