@@ -108,6 +108,7 @@ export const mintStyle = mergeStyles({
 });
 
 
+let artists=['PICASSO','KANDINSKY','MONET','JCARAVAGGIO','VAN EYCK','VAN GOGH','MANET','MATISSE','POLLOCK' ,'TURNER' ,'DÜRER' ,'MICHELANGELO','GOYA','GIOTTO','CÉZANNE','REMBRANDT','VELÁZQUEZ']
 
 class Mint extends Component {
 
@@ -174,7 +175,6 @@ class Mint extends Component {
     console.log(response);
   
   var context = this;
-  //context.setState({imageData: { image_urls: [["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_1.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_2.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_3.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_4.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_5.png"],["https://mlopsvarmaamlsa.blob.core.windows.net/original-styled-images/homescreen_styled_6.png"]] }});
   context.setState({imageData:response.data});
   console.log(response.data);
   this.setState({ showSelectSection: false });
@@ -304,14 +304,14 @@ class Mint extends Component {
     return (
       <div>
         <div className="container">
-        <h1 className="text-center" style={{ paddingTop: "10%"}}>Azure Picasso</h1>
-        <h3 className="text-center" style={{ paddingTop: "2%"}}>{"Welcome to Azure Picasso."}</h3>
-        <h4 className="text-center">{" Your portal to create NFTs with art powered by Azure AI"}</h4>
+        <h1 className="text-center" style={{ paddingTop: "5%"}}>Azure Picasso</h1>
+        <h3 className="text-center" style={{ paddingTop: "4%"}}>{"Welcome to Azure Picasso."}</h3>
+        <h4 className="text-center" style={{ paddingBottom: "3%"}}>{" Your portal to create NFTs with art powered by Azure AI"}</h4>
       
         <div>
             {this.state.showSelectSection && <div className={page}>                       
                <div className="container">
-                 <h3 className="text-center" style={{ paddingTop: "2%"}}>Upload your art</h3>
+                 <h3 className="text-center headerStyle" style={{ paddingTop: "2%"}}>Upload your art</h3>
                   
                   <div className="row" style={{ paddingTop: "2%"}}>
                     <div className="col text-center">
@@ -320,7 +320,7 @@ class Mint extends Component {
                     </div>
                     </div>
                   </div>
-                  <div className="row text-center" style={{ paddingTop: "10%"}}>
+                  <div className="row text-center" style={{ paddingTop: "5%"}}>
                     <span>
                       <span style={{ paddingRight: "2%"}}>
                       <label htmlFor="artImage" className="btn btn-primary btn-lg">Choose image</label>
@@ -335,13 +335,14 @@ class Mint extends Component {
               </div>  
       <br/>      
       {!this.state.showSelectSection &&<><div className="Container">
-            <h4> Generated art </h4>
+            <h4 class="headerStyle"> Generated art </h4>
           </div><div className="Container">
-              {this.state.imageData.map(image => (
+              {this.state.imageData.map((image, index) => (
                 <div className="image-card" key={image}>
                   <label>
                     <input type="radio" name="test" onChange={(e) => this.handleOnChange(e)} value={image} />
                     <img id="" className="image" src={image} alt="art images" />
+                    <label> <b>{artists[index]} </b></label>
                   </label>
                 </div>
               ))}
@@ -361,7 +362,9 @@ class Mint extends Component {
                         type='submit'
                         className={mintStyle}
                         value='MINT' />
-                      <button className={generateNewArtStyle} onClick={this.handleGoBack}>Upload New Art</button></>
+                      <button className={generateNewArtStyle} onClick={this.handleGoBack}>Upload New Art</button>                      
+                      </>
+                      
                   )}
                 </form>
               </div>
@@ -369,7 +372,7 @@ class Mint extends Component {
           </div>
           
           <hr/>
-          <h4>Minted Tokens</h4>
+          <h4 class="headerStyle">Minted Tokens</h4>
           <div className="row">
             { 
               this.state.tokenURIs.map((tokenURI, key) => {

@@ -62,11 +62,16 @@
 
   
   .image-card {
-  padding: 2px;
+  padding: 5px;
   border: 1px solid #ddd;
   border-radius: 2px;  
+  padding-left: 10px;
   }
   .image {
     width: 100%;
+  }
+
+  .headerStyle {
+    color: #2ac4c4;
   }
   
