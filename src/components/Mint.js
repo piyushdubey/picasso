@@ -6,6 +6,7 @@ import axios from 'axios';
 import React,{Component} from 'react';
 import { Link } from "react-router-dom";
 import {BlobServiceClient} from '@azure/storage-blob'
+import 'bootstrap/dist/css/bootstrap.css';
 
 
 import {
@@ -340,9 +341,8 @@ class Mint extends Component {
               {this.state.imageData.map((image, index) => (
                 <div className="image-card" key={image}>
                   <label>
-                    <input type="radio" name="test" onChange={(e) => this.handleOnChange(e)} value={image} />
                     <img id="" className="image" src={image} alt="art images" />
-                    <label> <b>{artists[index]} </b></label>
+                    <label style={{ paddingTop: "5%"}}> <input type="radio" class="option-input radio" name="example" onChange={(e) => this.handleOnChange(e)} value={image}/> <b>{artists[index]} </b> </label> 
                   </label>
                 </div>
               ))}
