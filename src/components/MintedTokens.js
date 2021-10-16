@@ -176,17 +176,17 @@ class MintedTokens extends Component {
   render() {
     return (
       <div className="container">
-        <h1 className="text-center" style={{ paddingTop: "10%"}}>Azure Picasso</h1>
-        <h3 className="text-center" style={{ paddingTop: "2%"}}>{"Welcome to Azure Picasso."}</h3>
+        <img className="text-center" style={{ paddingTop: "0%", paddingLeft:"20%"}} src= "/images/logo.png" alt="logo"/>        
+        <h3 className="text-center" style={{ paddingTop: "0%"}}>{"Welcome to Azure Picasso."}</h3>
         <h4 className="text-center">{" Your portal to create NFTs with art powered by Azure AI"}</h4>
         <br/>
-        <h4 className="text-center">{" The below are your minted tokens"}</h4>
+        <h4 className="text-left headerStyle" style={{ paddingTop: "3%"}}>Your Minted Tokens</h4>
         
         <div className="row">
             { 
               this.state.tokenURIs.map((tokenURI, key) => {
                 return(
-                  <div key={key} className="col-md-4" style={{ padding: "2%"}}>
+                  <div key={key} className="col-md-3" style={{ padding: "2%"}}>
                      <div class="row">
                       
                       <img src={tokenURI} className="img-thumbnail"/>

@@ -44,8 +44,7 @@ const CreateImage = () => {
 return (
     <Stack>
       <div className="container">
-        <h1 className="text-center" style={{ paddingTop: "10%"}}>Azure Picasso</h1>
-        <h3 className="text-center" style={{ paddingTop: "2%"}}>{"Welcome to Azure Picasso."}</h3>
+        <img className="text-center" style={{ paddingTop: "0%", paddingLeft:"20%", paddingBottom:"2%"}} src= "/images/logo.png" alt="logo"/>        
         <h4 className="text-center">{" Your portal to create NFTs with art powered by Azure AI"}</h4>
         
         <div className = "row" style={{ paddingTop: "3%"}}>
@@ -56,7 +55,7 @@ return (
         </div>
         <div className="row" style={{ paddingTop: "4%"}}>
           <div className="col text-center">
-          <CreateImagePic/>
+          <img className="text-center" style={{ height: "350px", width:"500px"}} src= "/images/monalisa.jpg" alt="logo"/>                  
           </div>
         </div>
     </div>

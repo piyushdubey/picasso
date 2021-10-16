@@ -305,9 +305,9 @@ class Mint extends Component {
     return (
       <div>
         <div className="container">
-        <h1 className="text-center" style={{ paddingTop: "5%"}}>Azure Picasso</h1>
-        <h3 className="text-center" style={{ paddingTop: "4%"}}>{"Welcome to Azure Picasso."}</h3>
-        <h4 className="text-center" style={{ paddingBottom: "3%"}}>{" Your portal to create NFTs with art powered by Azure AI"}</h4>
+        <img className="text-center" style={{ paddingTop: "0%", paddingLeft:"20%"}} src= "/images/logo.png" alt="logo"/>        
+        <h3 className="text-center" style={{ paddingTop: "0%"}}>{"Welcome to Azure Picasso."}</h3>
+        <h4 className="text-center" style={{ paddingBottom: "1%"}}>{" Your portal to create NFTs with art powered by Azure AI"}</h4>
       
         <div>
             {this.state.showSelectSection && <div className={page}>                       
