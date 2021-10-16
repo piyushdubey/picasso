@@ -377,7 +377,7 @@ class Mint extends Component {
             { 
               this.state.tokenURIs.map((tokenURI, key) => {
                 return(
-                  <div key={key} className="col-md-3" style={{ padding: "2%"}}>
+                  <div key={key} className="col-md-2" style={{ padding: "2%"}}>
                      <div class="row">                      
                       <img src={tokenURI} className="image"/>                   
                       <div class="col text-start">

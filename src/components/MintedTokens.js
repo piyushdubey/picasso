@@ -156,7 +156,7 @@ class MintedTokens extends Component {
     console.log(tokenURI)
     this.state.contract.methods.mintNFT(account, tokenURI).send({ from: account })
     .once('receipt', (receipt) => {
-      console.log(receipt)
+      console.log("tokenURIs", tokenURI);
       this.setState({
         tokenURIs: [...this.state.tokenURIs, tokenURI]
       })
@@ -186,10 +186,10 @@ class MintedTokens extends Component {
             { 
               this.state.tokenURIs.map((tokenURI, key) => {
                 return(
-                  <div key={key} className="col-md-3" style={{ padding: "2%"}}>
+                  <div key={key} className="col-md-2" style={{ padding: "2%"}}>
                      <div class="row">
                       
-                      <img src={tokenURI} className="img-thumbnail"/>
+                      <img src={tokenURI} style={{ border:"0px"}} className="img-thumbnail"/>
                    
                       <div class="col text-start">
                         Minted Token #{Math.floor(Math.random() * 2000)}
